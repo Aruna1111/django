@@ -1,0 +1,193 @@
+{% extends "users/base.html" %}
+{% load static %}
+
+{% block title %} Test Page {% endblock title%}
+
+{% block css %}
+    <link rel="stylesheet"  href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+{% endblock %}
+{% block head %}
+<style>
+  .col-8{
+    margin-top:5%;
+  }
+  .chartBox {
+    width: 230px;
+  }
+  .chartBoxMain {
+    width: 720px;
+  }
+  .right-top {
+    position: absolute;
+    right: 0%;
+    top: 0%;
+  }
+  .right-bottom {
+    position: absolute;
+    right: 0%;
+    bottom: 0%;
+  }
+  .left-bottom {
+    position: absolute;
+    left: 0%;
+    bottom: 0%;
+  }
+  .left-top {
+    position: absolute;
+    left: 0%;
+    top: 0%;
+  }
+  .center{
+    position: absolute;
+    top:10%;
+    left:-2%;
+  }
+  .buttonn{
+    width:150px;
+    height:80px;
+    position: absolute;
+    top:50%;
+    left:80%;
+    
+  }
+</style>
+{% endblock%}
+{% block content %}
+
+   
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script> 
+  <div class ="col-8" style="display:flex">
+    <div class="chartBox right-top">
+	    <canvas id="Safety"></canvas>
+    </div>
+    <div class="chartBox right-bottom">
+      <canvas id="Information"></canvas>
+    </div>
+    <div class="chartBox left-top">
+      <canvas id="Communication"></canvas>
+    </div>
+    <div class="chartBox left-bottom">
+      <canvas id="Production"></canvas>
+    </div>
+    <div class="chartBoxMain center">
+      <canvas id="Main"></canvas>
+    </div>
+  </div>
+  <button type="submit" class="ant-btn-primary buttonn">
+    <i class="fa fa-chevron-circle-right" aria-hidden="true"></i>
+    <span>Start</span>
+  </button>
+  <script>
+    
+    const dataSaf = {
+      labels: ["Safety"],
+      datasets: [{ 
+        data: [86, 14],
+        borderColor: ["rgb(62,149,205)"],
+        backgroundColor: ["rgb(62,149,205,0.1)"],
+        borderWidth:2
+      }]
+    };
+    const dataInfo={
+      labels: ["Information"],
+      datasets: [{ 
+        data: [76, 24],
+        borderColor: ["rgb(60,186,159)"],
+        backgroundColor: ["rgb(60,186,159,0.1)"],
+        borderWidth:2
+      }]
+    };
+    const dataCom={
+      labels: ["Communication"],
+      datasets: [{ 
+        data: [80, 20],
+        borderColor: ["rgb(255,165,0)"],
+        backgroundColor: ["rgb(255,165,0,0.1)"],
+        borderWidth:2
+      }]
+    };
+    const dataProd={
+      labels: ["Production"],
+      datasets: [{ 
+        data: [67, 33],
+        borderColor: ["rgb(196,88,80)"],
+        backgroundColor: ["rgb(196,88,80,0.1)"],
+        borderWidth:2
+      }]
+    };
+    const dataMain={ 
+      labels:["Law", "Identity Management", "Data Protection", "Health", "Storage", "Search", "Critical Evaluation", "Self-Service", "Active Participation", "Collaboration", "Social Awareness", "Media Choice", "Production and Sharing", "Digital Exploration", "Automation", "Configuration"], 
+      datasets: [{
+        data: [67, 80, 92, 76, 64, 78, 84, 63, 59, 91, 76, 71, 81, 69, 95, 71], 
+        backgroundColor: ["rgb(62,149,205,0.1)", "rgb(62,149,205,0.1)", "rgb(62,149,205,0.1)", "rgb(62,149,205,0.1)", "rgb(60,186,159,0.1)", "rgb(60,186,159,0.1)", "rgb(60,186,159,0.1)", "rgb(60,186,159,0.1)", "rgb(196,88,80,0.1)", "rgb(196,88,80,0.1)", "rgb(196,88,80,0.1)", "rgb(196,88,80,0.1)", "rgb(255,165,0,0.1)", "rgb(255,165,0,0.1)", "rgb(255,165,0,0.1)", "rgb(255,165,0,0.1)"],
+        borderWidth:3
+      }] 
+    };
+   
+
+
+    const configSaf={
+      type: 'doughnut',
+      data: dataSaf
+    };
+    const configInfo={
+      type: 'doughnut',
+      data: dataInfo
+    };
+    const configCom={
+      type: 'doughnut',
+      data: dataCom
+    };
+    const configProd={
+      type: 'doughnut',
+      data: dataProd
+    };
+    const configMain={
+      type: 'polarArea',
+      data: dataMain,
+      options: {
+        scale: {
+            ticks: {
+                display: false,
+            },
+        },
+        legend: {
+          display: false
+        },
+      },
+    };
+    
+    
+
+
+      
+    const Safety = new Chart(
+      document.getElementById('Safety').getContext('2d'),
+      configSaf
+    );
+    const Information = new Chart(
+      document.getElementById('Information').getContext('2d'),
+      configInfo
+    );
+    const Communication = new Chart(
+      document.getElementById('Communication').getContext('2d'),
+      configCom
+    );
+    const Production = new Chart(
+      document.getElementById('Production').getContext('2d'),
+      configProd
+    );
+    const Main = new Chart(
+      document.getElementById('Main').getContext('2d'),
+      configMain
+    );
+    
+      
+  </script>
+    
+
+  
+  
+
+{% endblock content %}
